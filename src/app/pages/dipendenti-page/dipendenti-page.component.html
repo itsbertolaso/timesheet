@@ -1,0 +1,25 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <a class="btn btn-primary" href="dipendenti/new">Nuovo</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-datatable
+          [lista]="lista"
+          [options]="options"
+          selectiontype="single"
+          style="display: flex; flex:1"
+          (selectRows)="select($event)"
+          [delete]="true"
+          [edit]="true"
+          (onDeleteEvent)="onDeleteHandler($event)"
+          (onEditEvent)="onEditHandler($event)"
+        >
+        </app-datatable>
+      </div>
+    </div>
+  </div>
+</div>
