@@ -1,24 +1,30 @@
 <div class="card mt-3">
   <div class="card-body">
-    <div class="row">
-      <div class="col-12">
-        <a class="btn btn-primary" [routerLink]="['/dipendenti/new']">Nuovo</a>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <app-datatable
+            [lista]="lista"
+            [options]="options"
+            selectiontype="single"
+            style="display: flex; flex:1"
+            (selectRows)="select($event)"
+            [delete]="true"
+            [edit]="true"
+            (onDeleteEvent)="onDeleteHandler($event)"
+            (onEditEvent)="onEditHandler($event)"
+          >
+          </app-datatable>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <app-datatable
-          [lista]="lista"
-          [options]="options"
-          selectiontype="single"
-          style="display: flex; flex:1"
-          (selectRows)="select($event)"
-          [delete]="true"
-          [edit]="true"
-          (onDeleteEvent)="onDeleteHandler($event)"
-          (onEditEvent)="onEditHandler($event)"
-        >
-        </app-datatable>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <div class="text-center">
+            <button class="btn btn-primary" [routerLink]="['/dipendenti/new']">
+              Aggiungi
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
