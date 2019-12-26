@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "create404": "create404.bat",
     "build": "ng build --prod --output-path docs --base-href /timesheet/",
+    "buildAndCreate404": "npm run build && npm run create404",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
