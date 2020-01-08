@@ -9,12 +9,9 @@ export class DipendentiService {
     {
       id: uuid.v4(),
       nome: "Marco",
-      regione: "veneto",
+      regione: "Veneto",
       sex: "m"
-    },
-    { id: uuid.v4(), nome: "Mario", regione: "lazio", sex: "f" },
-    { id: uuid.v4(), nome: "Mario", regione: "veneto", sex: "f" },
-    { id: uuid.v4(), nome: "Piero", regione: "campania", sex: "m" }
+    }
   ];
   /*
 
