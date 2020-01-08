@@ -19,13 +19,21 @@ export class NewDipendentiPageComponent implements OnInit {
 
   ngOnInit() {
     this.formgroup = this.fb.group({
-      nome: [""],
-      regione: [""],
-      sex: [""]
+      name: [""],
+      surname: [""],
+      taxcode: [""],
+      country: [""],
+      city: [""],
+      province: [""],
+      phoneNumber: [""],
+      address: [""],
+      gender: [""],
+      email: [""]
     });
   }
   conferma() {
-    this.dipendente.add(this.formgroup.value);
-    this.router.navigate(["dipendenti"]);
+    this.dipendente.add(this.formgroup.value).subscribe(res => {
+      this.router.navigate(["dipendenti"]);
+    });
   }
 }

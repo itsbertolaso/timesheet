@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DataTableOptions } from "src/app/api/datatable-options";
 import { DipendentiService } from "src/core/service/dipendenti.service";
 import { Router } from "@angular/router";
+import { ApiService } from "src/core/service/api.service";
 
 @Component({
   selector: "app-dipendenti-page",
@@ -13,26 +14,87 @@ export class DipendentiPageComponent implements OnInit {
     colsOptions: [
       {
         label: "Nome",
-        name: "nome"
+        name: "name"
       },
       {
-        label: "Regione",
-        name: "regione"
+        label: "Cognome",
+        name: "surname"
       },
       {
-        label: "Sesso",
-        name: "sex"
+        label: "city",
+        name: "city"
+      },
+      {
+        label: "Gender",
+        name: "gender"
+      },
+      {
+        label: "Email",
+        name: "email"
       }
     ]
+    /*colsOptions: [
+      {
+        label: "Nome",
+        name: "name"
+      },
+      {
+        label: "Cognome",
+        name: "surname"
+      },
+      {
+        label: "taxCode",
+        name: "taxCode"
+      },
+      {
+        label: "Country",
+        name: "country"
+      },
+      {
+        label: "province",
+        name: "province"
+      },
+      {
+        label: "city",
+        name: "city"
+      },
+      {
+        label: "address",
+        name: "address"
+      },
+      {
+        label: "Phone number",
+        name: "phoneNumber"
+      },
+      {
+        label: "Gender",
+        name: "gender"
+      },
+      {
+        label: "Email",
+        name: "email"
+      },
+      {
+        label: "ID",
+        name: "id"
+      }
+    ]
+    */
   };
   public lista: any[];
   constructor(
     public dipendenteService: DipendentiService,
-    public router: Router
+    public router: Router,
+    public api: ApiService
   ) {}
 
   ngOnInit() {
-    this.lista = this.dipendenteService.getAll();
+    this.dipendenteService.getAll().subscribe(res => {
+      this.lista = res;
+    });
+    this.api.get("employees").subscribe(res => {
+      console.log(res);
+    });
   }
 
   select(input: any[]) {
@@ -40,8 +102,11 @@ export class DipendentiPageComponent implements OnInit {
     this.router.navigate(["dipendenti", sogg.id]);
   }
   onDeleteHandler(id: any) {
-    this.dipendenteService.deleteById(id);
-    this.lista = this.dipendenteService.getAll();
+    this.dipendenteService.deleteById(id).subscribe(r => {
+      this.dipendenteService.getAll().subscribe(res => {
+        this.lista = res;
+      });
+    });
   }
   onEditHandler(id: any) {
     this.router.navigate(["dipendenti/edit", id]);

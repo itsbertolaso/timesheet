@@ -1,0 +1,24 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+
+@Injectable({
+  providedIn: "root"
+})
+export class ApiService {
+  private readonly host = "http://localhost:3000";
+  constructor(private http: HttpClient) {}
+
+  public get(path: string): Observable<any> {
+    return this.http.get(this.host + "/" + path);
+  }
+  public post(path: string, bodyObj: any): Observable<any> {
+    return this.http.post(this.host + "/" + path, bodyObj);
+  }
+  public delete(path: string, id: string): Observable<any> {
+    return this.http.delete(this.host + "/" + path + "/" + id);
+  }
+  public replace(path: string, id: string, body: any): Observable<any> {
+    return this.http.patch(this.host + "/" + path + "/" + id, body);
+  }
+}

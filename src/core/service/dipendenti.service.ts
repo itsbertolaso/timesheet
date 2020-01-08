@@ -1,41 +1,32 @@
 import { Injectable } from "@angular/core";
 import * as uuid from "uuid";
+import { ApiService } from "./api.service";
+import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
 export class DipendentiService {
-  constructor() {}
-  ListaSoggetti = [
-    {
-      id: uuid.v4(),
-      nome: "Marco",
-      regione: "Veneto",
-      sex: "m"
-    }
-  ];
-  /*
+  constructor(private api: ApiService) {}
+  private readonly path = "employees";
 
-*/
-  public getAll(): any[] {
-    return this.ListaSoggetti;
+  public getAll(): Observable<any> {
+    return this.api.get(this.path);
   }
 
   getByName(name: string): any[] {
     return this.ListaSoggetti.filter(i => i.nome === name);
   }
   getById(id: string) {
-    return this.ListaSoggetti.find(i => i.id === id);
+    return this.api.get(this.path + "/" + id);
   }
-  add(item: any) {
-    const obj = { id: uuid.v4(), ...item };
-    this.ListaSoggetti.push(obj);
+  add(item: any): Observable<any> {
+    const obj = { ...item };
+    return this.api.post(this.path, obj);
   }
-  deleteById(id: string) {
-    this.ListaSoggetti = this.ListaSoggetti.filter(i => i.id !== id);
+  public deleteById(id: string): Observable<any> {
+    return this.api.delete(this.path, id);
   }
-  replace(item: any) {
-    this.ListaSoggetti = this.ListaSoggetti.map(i =>
-      i.id === item.id ? item : i
-    );
+  replace(item: any): Observable<any> {
+    return this.api.replace(this.path, item.id, item);
   }
 }
