@@ -1,15 +1,20 @@
-<div class="container-fluid">
-  <form [formGroup]="formgroup">
-    <div class="row mb-2">
-      <div class="col">
-        <input
-          class="form-control "
-          formControlName="filter"
-          type="text"
-          placeholder="Filtra"
-        />
-      </div>
-      <button class="btn btn-primary" (click)="conferma()">Submit</button>
-    </div>
+<div class="row mb-2">
+  <form [formGroup]="formgroup" class="form-inline">
+    <select
+      *ngIf="colsOption"
+      class="browser-default custom-select mx-3"
+      formControlName="key"
+    >
+      <option *ngFor="let options of colsOption" [value]="options.name">{{
+        options.label
+      }}</option>
+    </select>
+    <input
+      class="form-control "
+      formControlName="filter"
+      type="text"
+      placeholder="Filtra"
+    />
+    <button class="btn btn-primary mx-2" (click)="conferma()">Submit</button>
   </form>
 </div>

@@ -3,7 +3,6 @@ import { DataTableOptions } from "src/app/api/datatable-options";
 import { DipendentiService } from "src/core/service/dipendenti.service";
 import { Router } from "@angular/router";
 import { ApiService } from "src/core/service/api.service";
-import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-dipendenti-page",
@@ -34,62 +33,58 @@ export class DipendentiPageComponent implements OnInit {
         name: "email"
       }
     ]
-    /*colsOptions: [
-      {
-        label: "Name",
-        name: "name"
-      },
-      {
-        label: "Surname",
-        name: "surname"
-      },
-      {
-        label: "Tax Code",
-        name: "taxCode"
-      },
-      {
-        label: "Country",
-        name: "country"
-      },
-      {
-        label: "Province",
-        name: "province"
-      },
-      {
-        label: "City",
-        name: "city"
-      },
-      {
-        label: "Address",
-        name: "address"
-      },
-      {
-        label: "Phone number",
-        name: "phoneNumber"
-      },
-      {
-        label: "Gender",
-        name: "gender"
-      },
-      {
-        label: "Email",
-        name: "email"
-      },
-      {
-        label: "ID",
-        name: "id"
-      }
-    ]
-    */
   };
   public lista: any[];
-  public formgroup: FormGroup;
-
+  public keys = [
+    {
+      label: "Name",
+      name: "name"
+    },
+    {
+      label: "Surname",
+      name: "surname"
+    },
+    {
+      label: "Tax Code",
+      name: "taxCode"
+    },
+    {
+      label: "Country",
+      name: "country"
+    },
+    {
+      label: "Province",
+      name: "province"
+    },
+    {
+      label: "City",
+      name: "city"
+    },
+    {
+      label: "Address",
+      name: "address"
+    },
+    {
+      label: "Phone number",
+      name: "phoneNumber"
+    },
+    {
+      label: "Gender",
+      name: "gender"
+    },
+    {
+      label: "Email",
+      name: "email"
+    },
+    {
+      label: "ID",
+      name: "id"
+    }
+  ];
   constructor(
     public dipendenteService: DipendentiService,
     public router: Router,
-    public api: ApiService,
-    public fb: FormBuilder
+    public api: ApiService
   ) {}
 
   ngOnInit() {
@@ -98,9 +93,6 @@ export class DipendentiPageComponent implements OnInit {
     });
     this.api.get("employees").subscribe(res => {
       console.log(res);
-    });
-    this.formgroup = this.fb.group({
-      key: ["name"]
     });
   }
 
@@ -118,9 +110,10 @@ export class DipendentiPageComponent implements OnInit {
   onEditHandler(id: any) {
     this.router.navigate(["dipendenti/edit", id]);
   }
-  filter(cod: any) {
+  filter(res: any) {
+    console.log(res);
     this.dipendenteService
-      .filter(this.formgroup.value.key, cod)
+      .filter(res.key, res.filter)
       .subscribe((res: any[]) => {
         this.lista = res;
       });
