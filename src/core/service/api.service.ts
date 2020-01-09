@@ -25,7 +25,7 @@ export class ApiService {
     if (value) {
       return this.http.get(this.host + "/" + path + "?" + key + "=" + value);
     } else {
-      return this.http.get(this.host + "/" + path);
+      return this.get(path);
     }
   }
 }

@@ -3,7 +3,29 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col" style="overflow: auto;">
-          <app-filter (onFilter)="filter($event)"></app-filter>
+          <div class="row">
+            <div class="px-3">
+              <form [formGroup]="formgroup">
+                <select
+                  class="custom-select"
+                  title="Scegli una opzione"
+                  formControlName="key"
+                >
+                  <option value="name">Name</option>
+                  <option value="surname">Surname</option>
+                  <option value="taxCode">Tax Code</option>
+                  <option value="country">Country</option>
+                  <option value="city">City</option>
+                  <option value="province">Province</option>
+                  <option value="phoneNumber">PhoneNumber</option>
+                  <option value="aAddress">Address</option>
+                  <option value="gender">Gender</option>
+                  <option value="email">Email</option>
+                </select>
+              </form>
+            </div>
+            <app-filter (onFilter)="filter($event)"></app-filter>
+          </div>
           <app-datatable
             [lista]="lista"
             [options]="options"

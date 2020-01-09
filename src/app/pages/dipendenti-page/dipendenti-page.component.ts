@@ -3,6 +3,7 @@ import { DataTableOptions } from "src/app/api/datatable-options";
 import { DipendentiService } from "src/core/service/dipendenti.service";
 import { Router } from "@angular/router";
 import { ApiService } from "src/core/service/api.service";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-dipendenti-page",
@@ -82,10 +83,13 @@ export class DipendentiPageComponent implements OnInit {
     */
   };
   public lista: any[];
+  public formgroup: FormGroup;
+
   constructor(
     public dipendenteService: DipendentiService,
     public router: Router,
-    public api: ApiService
+    public api: ApiService,
+    public fb: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -94,6 +98,9 @@ export class DipendentiPageComponent implements OnInit {
     });
     this.api.get("employees").subscribe(res => {
       console.log(res);
+    });
+    this.formgroup = this.fb.group({
+      key: ["name"]
     });
   }
 
@@ -112,8 +119,10 @@ export class DipendentiPageComponent implements OnInit {
     this.router.navigate(["dipendenti/edit", id]);
   }
   filter(cod: any) {
-    this.dipendenteService.filter("name", cod).subscribe((res: any[]) => {
-      this.lista = res;
-    });
+    this.dipendenteService
+      .filter(this.formgroup.value.key, cod)
+      .subscribe((res: any[]) => {
+        this.lista = res;
+      });
   }
 }
