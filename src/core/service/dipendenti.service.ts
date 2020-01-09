@@ -12,10 +12,6 @@ export class DipendentiService {
   public getAll(): Observable<any> {
     return this.api.get(this.path);
   }
-
-  getByName(name: string): any[] {
-    return this.ListaSoggetti.filter(i => i.nome === name);
-  }
   getById(id: string) {
     return this.api.get(this.path + "/" + id);
   }
