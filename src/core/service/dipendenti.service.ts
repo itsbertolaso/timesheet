@@ -25,4 +25,7 @@ export class DipendentiService {
   replace(item: any): Observable<any> {
     return this.api.replace(this.path, item.id, item);
   }
+  filter(key: string, value: any) {
+    return this.api.filter(this.path, key, value);
+  }
 }

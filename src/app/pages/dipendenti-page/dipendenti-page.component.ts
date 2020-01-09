@@ -111,4 +111,9 @@ export class DipendentiPageComponent implements OnInit {
   onEditHandler(id: any) {
     this.router.navigate(["dipendenti/edit", id]);
   }
+  filter(cod: any) {
+    this.dipendenteService.filter("name", cod).subscribe((res: any[]) => {
+      this.lista = res;
+    });
+  }
 }
