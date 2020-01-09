@@ -16,6 +16,8 @@ export class DettaglioDipendentiPageComponent implements OnInit {
 
   ngOnInit() {
     const id = this.routeActive.snapshot.params.id;
-    this.soggetto = this.dipendente.getById(id);
+    this.dipendente.getById(id).subscribe(res => {
+      this.soggetto = res;
+    });
   }
 }

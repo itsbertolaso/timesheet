@@ -13,15 +13,15 @@ export class DipendentiPageComponent implements OnInit {
   options: DataTableOptions = {
     colsOptions: [
       {
-        label: "Nome",
+        label: "Name",
         name: "name"
       },
       {
-        label: "Cognome",
+        label: "Surname",
         name: "surname"
       },
       {
-        label: "city",
+        label: "City",
         name: "city"
       },
       {
@@ -35,15 +35,15 @@ export class DipendentiPageComponent implements OnInit {
     ]
     /*colsOptions: [
       {
-        label: "Nome",
+        label: "Name",
         name: "name"
       },
       {
-        label: "Cognome",
+        label: "Surname",
         name: "surname"
       },
       {
-        label: "taxCode",
+        label: "Tax Code",
         name: "taxCode"
       },
       {
@@ -51,15 +51,15 @@ export class DipendentiPageComponent implements OnInit {
         name: "country"
       },
       {
-        label: "province",
+        label: "Province",
         name: "province"
       },
       {
-        label: "city",
+        label: "City",
         name: "city"
       },
       {
-        label: "address",
+        label: "Address",
         name: "address"
       },
       {

@@ -25,7 +25,7 @@ export class EditDipendentiPageComponent implements OnInit {
       this.formgroup = this.fb.group({
         name: [res.name],
         surname: [res.surname],
-        taxcode: [res.taxCode],
+        taxCode: [res.taxCode],
         country: [res.country],
         city: [res.city],
         province: [res.province],
