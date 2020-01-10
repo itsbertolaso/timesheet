@@ -67,6 +67,11 @@ export class NewDipendentiPageComponent implements OnInit {
         gender: [this.formgroup.value.gender],
         email: [this.formgroup.value.email]
       });
+      this.updateCity({
+        target: {
+          value: this.formgroup.value.province
+        }
+      });
     });
   }
   updateCity(event: any) {
