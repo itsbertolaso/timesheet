@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { DipendentiService } from "src/core/service/dipendenti.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { DomainService } from "src/core/service/domain.service";
 
 @Component({
   selector: "app-edit-dipendenti-page",
@@ -12,27 +13,41 @@ export class EditDipendentiPageComponent implements OnInit {
   public formgroup: FormGroup;
   public soggetto;
   public id;
+  public allCountry: any[]; //
+  public regions: any[];
+  public cities: any[];
+
   constructor(
     public fb: FormBuilder,
     public router: Router,
     public dipendente: DipendentiService,
-    public routeActive: ActivatedRoute
+    public routeActive: ActivatedRoute,
+    public country: DomainService
   ) {}
 
   ngOnInit() {
     this.id = this.routeActive.snapshot.params.id;
-    this.dipendente.getById(this.id).subscribe(res => {
-      this.formgroup = this.fb.group({
-        name: [res.name],
-        surname: [res.surname],
-        taxCode: [res.taxCode],
-        country: [res.country],
-        city: [res.city],
-        province: [res.province],
-        phoneNumber: [res.phoneNumber],
-        address: [res.address],
-        gender: [res.gender],
-        email: [res.email]
+    this.dipendente.getById(this.id).subscribe(dipendente => {
+      this.country.getAll().subscribe(res => {
+        this.allCountry = res;
+        this.country.getRegionInCountry(dipendente.country).subscribe(res => {
+          this.regions = res;
+          this.country.getCitiesInRegion(dipendente.province).subscribe(res => {
+            this.cities = res;
+            this.formgroup = this.fb.group({
+              name: [dipendente.name],
+              surname: [dipendente.surname],
+              taxCode: [dipendente.taxCode],
+              country: [this.allCountry[0].iso],
+              city: [this.cities[0].description],
+              province: [this.regions[0].description],
+              phoneNumber: [""],
+              address: [""],
+              gender: [""],
+              email: [""]
+            });
+          });
+        });
       });
     });
   }
@@ -42,5 +57,46 @@ export class EditDipendentiPageComponent implements OnInit {
       .subscribe(res => {
         this.router.navigate(["dipendenti"]);
       });
+  }
+
+  updateRegion(event: any) {
+    this.country.getRegionInCountry(event.target.value).subscribe(res => {
+      this.regions = res;
+      this.formgroup = this.fb.group({
+        name: [this.formgroup.value.name],
+        surname: [this.formgroup.value.surname],
+        taxCode: [this.formgroup.value.taxcode],
+        country: [this.formgroup.value.country],
+        city: [this.formgroup.value.city],
+        province: [this.regions[0].description],
+        phoneNumber: [this.formgroup.value.phoneNumber],
+        address: [this.formgroup.value.address],
+        gender: [this.formgroup.value.gender],
+        email: [this.formgroup.value.email]
+      });
+      this.updateCity({
+        target: {
+          value: this.formgroup.value.province
+        }
+      });
+    });
+  }
+  updateCity(event: any) {
+    this.country.getCitiesInRegion(event.target.value).subscribe(res => {
+      console.log(res);
+      this.cities = res;
+      this.formgroup = this.fb.group({
+        name: [this.formgroup.value.name],
+        surname: [this.formgroup.value.surname],
+        taxCode: [this.formgroup.value.taxcode],
+        country: [this.formgroup.value.country],
+        city: [this.cities[0].description],
+        province: [this.formgroup.value.province],
+        phoneNumber: [this.formgroup.value.phoneNumber],
+        address: [this.formgroup.value.address],
+        gender: [this.formgroup.value.gender],
+        email: [this.formgroup.value.email]
+      });
+    });
   }
 }

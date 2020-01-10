@@ -15,7 +15,6 @@ export class NewDipendentiPageComponent implements OnInit {
   public regions: any[];
   public cities: any[];
 
-  startingValue: any;
   constructor(
     public fb: FormBuilder,
     public router: Router,
@@ -35,7 +34,7 @@ export class NewDipendentiPageComponent implements OnInit {
             this.formgroup = this.fb.group({
               name: [""],
               surname: [""],
-              taxcode: [""],
+              taxCode: [""],
               country: [this.allCountry[0].iso],
               city: [this.cities[0].description],
               province: [this.regions[0].description],
@@ -55,12 +54,11 @@ export class NewDipendentiPageComponent implements OnInit {
   }
   updateRegion(event: any) {
     this.country.getRegionInCountry(event.target.value).subscribe(res => {
-      this.startingValue = res[0].description;
       this.regions = res;
       this.formgroup = this.fb.group({
         name: [this.formgroup.value.name],
         surname: [this.formgroup.value.surname],
-        taxcode: [this.formgroup.value.taxcode],
+        taxCode: [this.formgroup.value.taxcode],
         country: [this.formgroup.value.country],
         city: [this.formgroup.value.city],
         province: [this.regions[0].description],
@@ -73,13 +71,12 @@ export class NewDipendentiPageComponent implements OnInit {
   }
   updateCity(event: any) {
     this.country.getCitiesInRegion(event.target.value).subscribe(res => {
-      this.startingValue = res[0].description;
       this.cities = res;
       console.log(res);
       this.formgroup = this.fb.group({
         name: [this.formgroup.value.name],
         surname: [this.formgroup.value.surname],
-        taxcode: [this.formgroup.value.taxcode],
+        taxCode: [this.formgroup.value.taxcode],
         country: [this.formgroup.value.country],
         city: [this.cities[0].description],
         province: [this.formgroup.value.province],

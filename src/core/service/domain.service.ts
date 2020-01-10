@@ -23,4 +23,10 @@ export class DomainService {
   getCitiesInRegion(region) {
     return this.api.get(this.cities + "?regionDescription=" + region);
   }
+  getCountryByKey(key, value) {
+    return this.api.get(this.countries + "?" + key + "=" + value);
+  }
+  getRegionByKey(key, value) {
+    return this.api.get(this.region + "?" + key + "=" + value);
+  }
 }
