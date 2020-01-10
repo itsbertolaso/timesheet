@@ -38,13 +38,13 @@ export class EditDipendentiPageComponent implements OnInit {
               name: [dipendente.name],
               surname: [dipendente.surname],
               taxCode: [dipendente.taxCode],
-              country: [this.allCountry[0].iso],
-              city: [this.cities[0].description],
-              province: [this.regions[0].description],
-              phoneNumber: [""],
-              address: [""],
-              gender: [""],
-              email: [""]
+              country: [dipendente.country],
+              city: [dipendente.city],
+              province: [dipendente.province],
+              phoneNumber: [dipendente.phoneNumber],
+              address: [dipendente.address],
+              gender: [dipendente.gender],
+              email: [dipendente.email]
             });
           });
         });
@@ -65,7 +65,7 @@ export class EditDipendentiPageComponent implements OnInit {
       this.formgroup = this.fb.group({
         name: [this.formgroup.value.name],
         surname: [this.formgroup.value.surname],
-        taxCode: [this.formgroup.value.taxcode],
+        taxCode: [this.formgroup.value.taxCode],
         country: [this.formgroup.value.country],
         city: [this.formgroup.value.city],
         province: [this.regions[0].description],
@@ -88,7 +88,7 @@ export class EditDipendentiPageComponent implements OnInit {
       this.formgroup = this.fb.group({
         name: [this.formgroup.value.name],
         surname: [this.formgroup.value.surname],
-        taxCode: [this.formgroup.value.taxcode],
+        taxCode: [this.formgroup.value.taxCode],
         country: [this.formgroup.value.country],
         city: [this.cities[0].description],
         province: [this.formgroup.value.province],
