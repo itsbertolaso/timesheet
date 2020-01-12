@@ -1,4 +1,7 @@
-<table class="table">
+<div *ngIf="!lista" class="row h-100 w-100 m-auto text-center">
+  <h1 class="p-5 col">Loading..</h1>
+</div>
+<table class="table" *ngIf="lista">
   <thead class="thead-dark">
     <tr>
       <th>#</th>
@@ -15,7 +18,7 @@
       [ngClass]="{ 'bg-primary text-white': selected[i] }"
       class=" cursor"
     >
-      <th (click)="select(i)">{{ i + 1 }}</th>
+      <th (click)="select(i)">{{ item.id ? item.id : i + 1 }}</th>
       <td (click)="select(i)" scope="row" *ngFor="let k of options.colsOptions">
         {{ item[k.name] }}
       </td>
