@@ -21,16 +21,8 @@ export class DipendentiPageComponent implements OnInit {
         name: "surname"
       },
       {
-        label: "City",
-        name: "city"
-      },
-      {
-        label: "Gender",
-        name: "gender"
-      },
-      {
-        label: "Email",
-        name: "email"
+        label: "Tax Code",
+        name: "taxcode"
       }
     ]
   };
@@ -46,39 +38,7 @@ export class DipendentiPageComponent implements OnInit {
     },
     {
       label: "Tax Code",
-      name: "taxCode"
-    },
-    {
-      label: "Country",
-      name: "country"
-    },
-    {
-      label: "Province",
-      name: "province"
-    },
-    {
-      label: "City",
-      name: "city"
-    },
-    {
-      label: "Address",
-      name: "address"
-    },
-    {
-      label: "Phone number",
-      name: "phoneNumber"
-    },
-    {
-      label: "Gender",
-      name: "gender"
-    },
-    {
-      label: "Email",
-      name: "email"
-    },
-    {
-      label: "ID",
-      name: "id"
+      name: "taxcode"
     }
   ];
   constructor(
@@ -90,9 +50,6 @@ export class DipendentiPageComponent implements OnInit {
   ngOnInit() {
     this.dipendenteService.getAll().subscribe(res => {
       this.lista = res;
-    });
-    this.api.get("employees").subscribe(res => {
-      console.log(res);
     });
   }
 

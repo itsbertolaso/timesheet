@@ -6,13 +6,13 @@ import { Observable } from "rxjs";
 })
 export class DipendentiService {
   constructor(private api: ApiService) {}
-  private readonly path = "employees";
+  private readonly path = "api/dipendenti/";
 
   public getAll(): Observable<any> {
     return this.api.get(this.path);
   }
   getById(id: string) {
-    return this.api.get(this.path + "/" + id);
+    return this.api.get(this.path + "id/" + id);
   }
   add(item: any): Observable<any> {
     const obj = { ...item };

@@ -6,10 +6,11 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class ApiService {
-  private readonly host = "https://its-timesheet-backend.herokuapp.com";
+  private readonly host = "http://localhost:8090";
   constructor(private http: HttpClient) {}
 
   public get(path: string): Observable<any> {
+    console.log(this.host + "/" + path);
     return this.http.get(this.host + "/" + path);
   }
   public post(path: string, bodyObj: any): Observable<any> {
