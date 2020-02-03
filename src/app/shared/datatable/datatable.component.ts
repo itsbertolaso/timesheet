@@ -12,7 +12,7 @@ export class DatatableComponent implements OnInit {
   @Input() public selectiontype: string;
   @Input() delete: boolean;
   @Input() edit: boolean;
-
+  
   @Output() selectRows: EventEmitter<any> = new EventEmitter<any>();
   @Output() onEditEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDeleteEvent: EventEmitter<any> = new EventEmitter<any>();

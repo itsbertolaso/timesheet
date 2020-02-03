@@ -13,6 +13,10 @@ export class DipendentiPageComponent implements OnInit {
   options: DataTableOptions = {
     colsOptions: [
       {
+        label: "ID",
+        name: "idDipendente"
+      },
+      {
         label: "Name",
         name: "name"
       },
@@ -55,7 +59,7 @@ export class DipendentiPageComponent implements OnInit {
 
   select(input: any[]) {
     const sogg = input[0];
-    this.router.navigate(["dipendenti", sogg.id]);
+    this.router.navigate(["dipendenti", sogg.idDipendente]);
   }
   onDeleteHandler(id: any) {
     this.dipendenteService.deleteById(id).subscribe(r => {
@@ -65,6 +69,7 @@ export class DipendentiPageComponent implements OnInit {
     });
   }
   onEditHandler(id: any) {
+    console.log(id);
     this.router.navigate(["dipendenti/edit", id]);
   }
   filter(res: any) {

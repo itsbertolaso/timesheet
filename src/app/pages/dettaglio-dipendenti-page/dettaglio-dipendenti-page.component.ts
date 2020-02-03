@@ -19,11 +19,9 @@ export class DettaglioDipendentiPageComponent implements OnInit {
   ngOnInit() {
     const id = this.routeActive.snapshot.params.id;
     this.dipendente.getById(id).subscribe(res => {
-      this.country.getByIso(res.country).subscribe(cc => {
-        let s = { ...res, country: cc[0].description };
-        console.log(cc[0].description);
-        this.soggetto = s;
-      });
+      let s = { ...res };
+      this.soggetto = s.response;
+      console.log(this.soggetto);
     });
   }
 }
